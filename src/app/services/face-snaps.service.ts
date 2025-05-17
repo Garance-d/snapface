@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import {Injectable} from "@angular/core";
 import {FaceSnap} from '../models/face-snap';
 import {SnapType} from '../models/snap-type.type';
 
@@ -35,7 +35,7 @@ export class FaceSnapsService {
 
   ];
 
-  getFaceSnaps() : FaceSnap[] {
+  getFaceSnaps(): FaceSnap[] {
     return [...this.faceSnaps];
   }
 
@@ -52,5 +52,16 @@ export class FaceSnapsService {
     faceSnap.snap(snapType);
   }
 
+  addFaceSnap(formValue: { title: string, description: string, imageUrl: string, location?: string }) {
+    const faceSnap: FaceSnap = {
+      ...formValue,
+      snaps: 0,
+      createdDate: new Date(),
+
+      // on vas chercher le dernier snap et ont ajoute +1 à l'id
+      id: this.faceSnaps[this.faceSnaps.length - 1].id + 1
+    };
+    this.faceSnaps.push(faceSnap);
+  }
 }
 

@@ -1,7 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {FaceSnap} from '../models/face-snap';
-import {NgStyle, TitleCasePipe} from '@angular/common';
+import {TitleCasePipe} from '@angular/common';
+import {Component, Input} from '@angular/core';
 import {Router} from '@angular/router';
+import {FaceSnap} from '../models/face-snap';
 
 @Component({
   selector: 'app-face-snap',
@@ -13,7 +13,6 @@ import {Router} from '@angular/router';
   // Le mot clé de DecimalPipe à utiliser et le number par decimal
   imports: [
     TitleCasePipe,
-    NgStyle,
   ],
   templateUrl: './face-snap.component.html',
   styleUrl: './face-snap.component.scss'
