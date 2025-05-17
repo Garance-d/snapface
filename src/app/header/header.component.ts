@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import {RouterLink, RouterLinkActive} from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {Router, RouterLink, RouterLinkActive} from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -7,6 +7,16 @@ import {RouterLink, RouterLinkActive} from '@angular/router';
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
 
+  constructor(private router: Router) { }
+
+  ngOnInit() {
+
+  }
+
+  onAddNewFaceSnap() {
+    this.router.navigateByUrl('/create');
+
+  }
 }

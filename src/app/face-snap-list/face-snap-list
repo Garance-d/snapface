@@ -1,0 +1,4 @@
+À partir du moment où le nombre d'émissions utiles est connu, vous utiliserez l'opérateur  take(). take() prend un nombre comme argument, et complète l'Observable quand il a émis ce nombre de valeurs.
+
+ngOnInit()  est ce qu'on appelle un lifecycle hook : une méthode qui est appelée à un moment spécifique du cycle de vie de son component. Il existe plusieurs lifecycle hooks, mais celui qui va nous intéresser pour le pattern Destroy Subject est  ngOnDestroy  .
+ ngOnDestroy  est appelé au moment de la destruction du component.
