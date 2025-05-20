@@ -1,6 +1,7 @@
 import {Injectable} from "@angular/core";
 import {FaceSnap} from '../models/face-snap';
 import {SnapType} from '../models/snap-type.type';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable({
   // Enregistre se service à la racine de l'application
@@ -56,12 +57,14 @@ export class FaceSnapsService {
     const faceSnap: FaceSnap = {
       ...formValue,
       snaps: 0,
-      createdDate: new Date(),
+      createdAt: new Date(),
 
       // on vas chercher le dernier snap et ont ajoute +1 à l'id
       id: this.faceSnaps[this.faceSnaps.length - 1].id + 1
     };
     this.faceSnaps.push(faceSnap);
   }
+
+  constructor(private http: HttpClient) { }
 }
 
