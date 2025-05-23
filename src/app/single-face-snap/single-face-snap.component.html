@@ -1,5 +1,5 @@
 
-<div class="face-snap-card" [ngClass]="{snapped: userHasSnapped}">
+<div class="face-snap-card" *ngIf="faceSnaps$ | async as faceSnap" [ngClass]="{snapped: buttonText === 'UnSnap'}">
   <h1>{{myLargeNumber | number: '1.0-0'}}</h1>
   <h1>{{myLargePourcentageNumber | percent: '1.6-6'}}</h1>
   <h1>{{myPrice | currency : 'EUR' :'code'}}</h1>
@@ -14,7 +14,7 @@
   <p>{{faceSnap.description}}</p>
   <p>FaceSnap créer le {{faceSnap.createdAt | date: 'dd MMMM YYYY à HH:mm' }}</p>
   <p>
-    <button (click)="onSnap()" > {{ snapButtonText }}</button>
+    <button (click)="onSnap(faceSnap.id)" > {{ buttonText }}</button>
     <span [ngStyle]="{color: 'rgb(0,'+faceSnap.snaps+',0)'}"> ❤❤ {{faceSnap.snaps}} ❤❤</span>
     </p>
 </div>

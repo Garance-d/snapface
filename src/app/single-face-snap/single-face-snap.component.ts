@@ -1,6 +1,17 @@
 import {Component, OnInit} from '@angular/core';
+import {Observable, tap} from 'rxjs';
 import {FaceSnap} from '../models/face-snap';
-import {CurrencyPipe, DatePipe, DecimalPipe, NgClass, NgStyle, PercentPipe, TitleCasePipe} from '@angular/common';
+import {
+  AsyncPipe,
+  CurrencyPipe,
+  DatePipe,
+  DecimalPipe,
+  NgClass,
+  NgIf,
+  NgStyle,
+  PercentPipe,
+  TitleCasePipe
+} from '@angular/common';
 import {FaceSnapsService} from '../services/face-snaps.service';
 import {ActivatedRoute, RouterLink} from '@angular/router';
 
@@ -21,6 +32,8 @@ import {ActivatedRoute, RouterLink} from '@angular/router';
     PercentPipe,
     CurrencyPipe,
     RouterLink,
+    NgIf,
+    AsyncPipe,
   ],
   templateUrl: './single-face-snap.component.html',
   styleUrl: './single-face-snap.component.scss'
@@ -31,58 +44,42 @@ import {ActivatedRoute, RouterLink} from '@angular/router';
 export class SingleFaceSnapComponent implements OnInit {
 
   // @Input permet que ma propriéter puisse être injecter depuis l'extérieur d'un component
-  faceSnap!: FaceSnap;
+
+  faceSnaps$!: Observable<FaceSnap>;
+  buttonText!: string;
 
   //Création d'attribut de classe en associant le nom de l'attribut avec son type
   // Ont utilise ! (bang) pour initialiser chaque proprieter
 
-  snapButtonText!: string;
-  userHasSnapped!: boolean;
+  // snapButtonText!: string;
+  // userHasSnapped!: boolean;
   myLargeNumber: number = 1234567.89;
   myLargePourcentageNumber: number = 0.8953;
   myPrice: number = 12.89;
 
-  constructor(private faceSnapsService: FaceSnapsService, private route: ActivatedRoute) {}
-
-  ngOnInit() {
-    this.preparedInterface();
-    this.getFaceSnap();
+  constructor(private faceSnapsService: FaceSnapsService, private route: ActivatedRoute) {
   }
 
+  ngOnInit() {
+    // this.preparedInterface();
+    // this.getFaceSnap();
+    this.buttonText = 'Snap'
+    const faceSnapId = this.route.snapshot.params['id'];
+    this.faceSnaps$ = this.faceSnapsService.getFaceSnapById(faceSnapId);
+  }
 
 
   // Le nom de la méthode qui commence par On signale que cette méthode répond à un événement
-  onSnap(): void {
-    if (this.userHasSnapped) {
-      this.unSnap();
-
+  onSnap(faceSnapId: number): void {
+    if (this.buttonText === 'Snap') {
+      this.faceSnaps$ = this.faceSnapsService.getFaceSnapById(faceSnapId,'snap').pipe(
+        tap(() => this.buttonText = 'UnSnap')
+      )
+    } else {
+      this.faceSnaps$ = this.faceSnapsService.snapFaceSnapById(faceSnapId, 'unsnap').pipe(
+        tap(() =>
+          this.buttonText = 'Snap'
+        ));
     }
-    else {
-      this.snap();
-    }
   }
-
-  snap(): void {
-    this.faceSnapsService.snapFaceSnapById(this.faceSnap.id, 'snap');
-    this.snapButtonText ="Snaps !";
-    this.userHasSnapped = true;
-  }
-
-  unSnap(): void {
-    this.faceSnapsService.snapFaceSnapById(this.faceSnap.id, 'unsnap');
-    this.snapButtonText ="UnSnaps !";
-    this.userHasSnapped = false;
-  }
-
-  private getFaceSnap() {
-    const faceSnapId = this.route.snapshot.params['id'];
-    this.faceSnap = this.faceSnapsService.getFaceSnapById(faceSnapId);
-  }
-
-  private preparedInterface() {
-    this.snapButtonText = "Oh snaps !";
-    this.userHasSnapped = false;
-  }
-
-  protected readonly FaceSnap = FaceSnap;
 }
