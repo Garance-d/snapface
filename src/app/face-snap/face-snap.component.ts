@@ -1,7 +1,7 @@
 import {TitleCasePipe} from '@angular/common';
 import {Component, Input} from '@angular/core';
 import {Router} from '@angular/router';
-import {FaceSnap} from '../models/face-snap';
+import {FaceSnap} from '../core/models/face-snap';
 
 @Component({
   selector: 'app-face-snap',

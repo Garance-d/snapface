@@ -50,4 +50,5 @@ export class FaceSnap {
     this.setLocation(location);
     return this;
   }
+
 }

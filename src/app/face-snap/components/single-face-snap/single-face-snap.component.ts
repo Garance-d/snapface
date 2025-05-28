@@ -1,6 +1,3 @@
-import {Component, OnInit} from '@angular/core';
-import {Observable, tap} from 'rxjs';
-import {FaceSnap} from '../models/face-snap';
 import {
   AsyncPipe,
   CurrencyPipe,
@@ -12,8 +9,11 @@ import {
   PercentPipe,
   TitleCasePipe
 } from '@angular/common';
-import {FaceSnapsService} from '../services/face-snaps.service';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, RouterLink} from '@angular/router';
+import {Observable, tap} from 'rxjs';
+import {FaceSnap} from '../../../core/models/face-snap';
+import {FaceSnapsService} from '../../../core/services/face-snaps.service';
 
 @Component({
   selector: 'app-single-face-snap',

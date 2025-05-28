@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
 import {filter, interval, map, Observable, tap} from 'rxjs';
-import {HeaderComponent} from './header/header.component';
+import {HeaderComponent} from './core/components/header/header.component';
 
 @Component({
   selector: 'app-root',

@@ -1,8 +1,7 @@
+import {HttpClient} from '@angular/common/http';
 import {Injectable} from "@angular/core";
 import {map, Observable, switchMap} from 'rxjs';
 import {FaceSnap} from '../models/face-snap';
-import {SnapType} from '../models/snap-type.type';
-import {HttpClient} from '@angular/common/http';
 
 @Injectable({
   // Enregistre se service à la racine de l'application

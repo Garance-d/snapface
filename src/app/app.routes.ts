@@ -1,11 +1,21 @@
-import {Routes} from '@angular/router';
-import {FaceSnapListComponent} from './face-snap-list/face-snap-list.component';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 import {LandingPageComponent} from './landing-page/landing-page.component';
-import {NewFaceSnapComponent} from './new-face-snap/new-face-snap.component';
-import {SingleFaceSnapComponent} from './single-face-snap/single-face-snap.component';
 
 export const routes: Routes = [
-  {path: 'facesnaps/:id', component: SingleFaceSnapComponent},
-  {path: 'facesnaps', component: FaceSnapListComponent},
+  //lazy loading
+  // Cette syntaxe fait en sorte qu'Angular génère un fichier JS séparé pour FaceSnapsModule, et l'application ne la charge que si l'utilisateur visite une route facesnaps/
+  {path: 'facesnaps', loadChildren: () => import('./face-snap/face-snaps.module').then(m =>m.FaceSnapsModule)},
+
   {path: '', component: LandingPageComponent},
-  {path: 'create', component: NewFaceSnapComponent}];
+  ];
+
+@NgModule({
+  imports: [
+    RouterModule.forChild(routes)
+  ],
+  exports: [
+    RouterModule
+  ],
+})
+export class AppRoutingModule {}

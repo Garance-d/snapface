@@ -1,0 +1,1 @@
+Ont créer un module core pour importer et globaliser tout fichier qui vas faire effet sur tout l'application
