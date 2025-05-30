@@ -6,13 +6,11 @@ import {FaceSnapComponent} from './face-snap.component';
 
 @NgModule ({
   imports: [CommonModule,
-  ReactiveFormsModule,
-  FaceSnapsRoutingModule],
+    ReactiveFormsModule,
+    FaceSnapsRoutingModule, FaceSnapComponent, NewFaceSnapComponent, SingleFaceSnapComponent, FaceSnapListComponent],
   declarations: [
-    FaceSnapComponent,
-    FaceSnapListComponent,
-    NewFaceSnapComponent,
-    SingleFaceSnapComponent,
+
+
   ],
   exports: [FaceSnapComponent,
     FaceSnapListComponent,
